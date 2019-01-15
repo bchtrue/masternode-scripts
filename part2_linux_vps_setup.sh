@@ -142,7 +142,7 @@ else
    printf "[-] Masternode NOT started..."
    printf "[-] Something goes wrong. Maybe request help at Commercium discord or ..."   
    printf "[-] Check your masternode status with following command manually and try to fix it: \ncommercium-cli masternode debug"
-   printf "[-] Correct response from this command is: “Masternode successfully started“. Then you’re finished." 
+   printf "[-] Correct response from this command is: \"Masternode successfully started\". Then you’re finished." 
 fi
 
-
+exit
