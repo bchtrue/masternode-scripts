@@ -70,7 +70,7 @@ masternodeprivkey=$NODEKEY
 EOF
 
 else
- read -n1 -r -p "Commercium config file already exists: $COMMERCIUMCONFIG... Press any key to open it in nano for editing. Нou can edit it manually or Ctrl-X at next step to exit if no action is required and config was successfully writen before";echo
+ read -n1 -r -p 'Commercium config file already exists.. Press any key to open it in nano for editing. Нou can edit it manually or Ctrl-X at next step to exit if no action is required and config was successfully writen before' key
  nano $COMMERCIUMCONFIG
 fi
 
@@ -94,7 +94,7 @@ echo "Run as root from other terminal windows: sudo apt-get install libgomp1"
 echo "After that you can continue this install proccess"
 echo "How to fix other daemon start errors ask at Commercium discord channel."
 echo
-read -n1 -r -p "Let's make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C";echo
+read -n1 -r -p 'Let\'s make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C' key
 
 
 # Wallet Sync
@@ -120,13 +120,13 @@ done
 
 
 # Sync done
-read -n1 -r -p "Your blockchain is now synced... Press any key to continue";echo
+read -n1 -r -p 'Your blockchain is now synced... Press any key to continue' key
 
 # Finishing touches
 echo "Now need to activate masternode."
 printf "Following command at LOCAL wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
-read -n1 -r -p "Open your local wallet, go to command line shell and activate your masternode Press any key to continue";echo
-read -n1 -r -p "Wait a few minutes for your masternode to start... Press any key to continue";echo
+read -n1 -r -p 'Open your local wallet, go to command line shell and activate your masternode Press any key to continue' key
+read -n1 -r -p 'Wait a few minutes for your masternode to start... Press any key to continue' key
 
 
 
