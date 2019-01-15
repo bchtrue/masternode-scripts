@@ -12,9 +12,8 @@ COMMERCIUMMASTERNODECONFIG=$COMMERCIUMCONFIGDIR/cmasternode.conf
 
 
 clear
-printf "Before you begin, follow PART 1 instuction about how to setup masternodes: https://github.com/CommerciumBlockchain/masternode-scripts Press any key to continue... or CTRL-C to exit"
-printf "Confirm that you are alredy have NODEKEY to setup your VPS masternode. Press any key to continue or Ctrl-C to exit..."
-printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
+printf "Before you begin, follow instuction about how to setup masternodes at your local wallet:\n\n https://github.com/CommerciumBlockchain/masternode-scripts\n\n"
+printf "Confirm that you are alredy have NODEKEY to setup your VPS masternode.\n"
 
 while true; do
     read -p "Do you wish to install Commercium wallet now?" yn
@@ -25,8 +24,10 @@ while true; do
     esac
 done
 
-#sudo apt-get -y install 
-echo "downloading files to user home: $HOME . . . "
+printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
+echo
+echo "[+] downloading files to user home: $HOME . . . "
+
 cd $HOME
 wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
 
