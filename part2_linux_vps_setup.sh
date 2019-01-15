@@ -77,15 +77,10 @@ fi
 
 # Fetch Params
 echo
-
-while true; do
-    read -p "Do you wish to fetch z-params (if you not sure press y)? " yn
-    case $yn in
-        [Yy]* ) $COMMERCIUMDAEMONDIR/fetch-params.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+if [ ! -e $HOME/sapling-spend.params ] || [ ! -e $HOME/sprout-proving.key ] || [ ! -e $HOME/sapling-output.params ] || [ ! -e $HOME/sprout-groth16.params ];
+then
+ $COMMERCIUMDAEMONDIR/fetch-params.sh
+fi 
 
 # Start commercium daemon
 $COMMERCIUMDAEMONDIR/commerciumd
