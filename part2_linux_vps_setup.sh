@@ -94,20 +94,43 @@ $COMMERCIUMDAEMONDIR/commerciumd
 #
 # check daemon running? 
 #
-
-read -n1 -r -p "Let's make sure no errors appear and Commercium daemon running... Press any key to continue";echo
-
-
-#
-currentblock="$($COMMERCIUMDAEMONDIR/commercium-cli getblockcount)"
-
-read -n1 -r -p "Please, check https://explorer.commercium.net/ block number and make sure that its the same or higher then this number from your Commercium daemon: $currentblock Press any key to continue";echo
+echo "If you see this error on the screen: \"E: Unable to locate package libgompl\""
+echo "Run as root from other terminal windows: sudo apt-get install libgomp1"
+echo "After that you can continue this install proccess"
+echo "How to fix other daemon start errors ask at Commercium discord channel."
 echo
-read -n1 -r -p "If it's ok then your blockchain is now synced... Press any key to continue or wait for sync";echo
+read -n1 -r -p "Let's make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C";echo
 
-###Finishing touches
-printf "Following command at local wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
-read -n1 -r -p "Now open your local wallet, go to command line shell and activate your masternode Press any key to continue";echo
+
+# Wallet Sync
+currentblock="$($COMMERCIUMDAEMONDIR/commercium-cli getblockcount)"
+highestblock="$(wget -nv -qO - https://api.commercium.net/api/getblockcount)"
+
+
+while  [ "$highestblock" != "$currentblock" ]
+do
+        clear
+        highestblock="$(wget -nv -qO - https://api.commercium.net/api/getblockcount)"
+        currentblock="$($COMMERCIUMDAEMONDIR/commercium-cli getblockcount)"
+        echo "Comparing block heights to ensure server is fully synced";
+        echo "Highest: $highestblock";echo "Currently at: $currentblock";
+        echo "Checking again in 60 seconds... The install will continue once it's synced.";echo
+        echo "Last 20 lines of the log for error checking...";
+        echo "===============";
+        tail -20 ~/.commercium/debug.log
+	echo "===============";
+	echo "Network unreachable errors can be normal. Just ensure the current block height is rising over time...";
+        sleep 60
+done
+
+
+# Sync done
+read -n1 -r -p "Your blockchain is now synced... Press any key to continue";echo
+
+# Finishing touches
+echo "Now need to activate masternode."
+printf "Following command at LOCAL wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
+read -n1 -r -p "Open your local wallet, go to command line shell and activate your masternode Press any key to continue";echo
 read -n1 -r -p "Wait a few minutes for your masternode to start... Press any key to continue";echo
 
 
@@ -116,10 +139,12 @@ ans=`$COMMERCIUMDAEMONDIR/commercium-cli masternode debug`
 
 if [ X"$ans" == X"successfully" ]; then
    printf "[+] Masternode successfully started..."
+   printf "[+] Congratulations!"
+   exit
 else
-   printf "[-] Masternode NOT started..."	
-   printf "[-] Check your masternode status with following command: commercium-cli masternode debug"
+   printf "[-] Masternode NOT started..."
+   printf "[-] Something goes wrong. Maybe request help at Commercium discord or ..."   
+   printf "[-] Check your masternode status with following command manually and try to fix it: \ncommercium-cli masternode debug"
+   printf "[-] Correct response from this command is: “Masternode successfully started“. Then you’re finished." 
    printf ""
 fi
-
-read -n1 -r -p "If the response is: “Masternode successfully started“, you’re finished.... Press any key to finish";echo
