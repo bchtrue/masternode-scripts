@@ -192,9 +192,9 @@ After connection enter your username and password then you will see linux shell.
 
 For securety purposes you can run your masternode as regular linux user, not `root`. If you want this then create new user `adduser cmmuser` (run as root) and then connect to your VPS with Putty again and login with this new user login and password._
 
-#### masternode-scripts
+#### Automatic VPS setup script:
 
-If you do not want to follow **part 2. Vps install** mannualy you can use our automatic VPS setup script `part2_linux_vps_setup.sh`:
+If you do not want to follow **part 2. Vps install mannualy** you can use our automatic VPS setup script `part2_linux_vps_setup.sh`:
 
 ```
 wget https://raw.githubusercontent.com/CommerciumBlockchain/masternode-scripts/master/part2_linux_vps_setup.sh
