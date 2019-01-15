@@ -281,6 +281,26 @@ There are 2 sync; one is blockchain and one is masternode. In some cases need to
 
 If you have troubles with syncing (it stop syncking) then it's possible to resync: Part 1) 3.
 
+#### 5. How to add commercium daemon to start automatically after VPS reboot
+
+Create new file `nano cmmstartup.sh`
+with following text:
+
+```
+#!/bin/sh
+cd ~/commercium_continuum-v1.0.5-linux
+./commerciumd
+```
+then 
+`chmod +x cmmstartup.sh`
+
+`crontab -e`
+
+add this line to the bottom:
+`@reboot bash ~/cmmstartup.sh`
+
+To test it just reboot your vps.
+
 P.S. Secure your vps: 
 https://www.eurovps.com/blog/20-ways-to-secure-linux-vps/
 
