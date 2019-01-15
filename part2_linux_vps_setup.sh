@@ -12,11 +12,11 @@ COMMERCIUMMASTERNODECONFIG=$COMMERCIUMCONFIGDIR/cmasternode.conf
 
 
 clear
-printf "Before you begin, follow instuction about how to setup masternodes at your local wallet:\n\n https://github.com/CommerciumBlockchain/masternode-scripts\n\n"
+printf "Before you begin. Follow instuction about how to setup masternodes at your local wallet (part 1). You can find this documentation here:\n\n https://github.com/CommerciumBlockchain/masternode-scripts\n\n"
 printf "Confirm that you are alredy have NODEKEY to setup your VPS masternode.\n"
 
 while true; do
-    read -p "Do you wish to install Commercium wallet now?" yn
+    read -p "Do you wish to install Commercium daemon now? " yn
     case $yn in
         [Yy]* ) echo ""; break;;
         [Nn]* ) exit;;
@@ -24,12 +24,14 @@ while true; do
     esac
 done
 
-printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
-echo
-echo "[+] downloading files to user home: $HOME . . . "
 
-cd $HOME
-wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
+if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
+then
+ printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
+ echo
+ cd $HOME
+ wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
+fi
 
 if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
 then
@@ -37,23 +39,26 @@ then
   exit
 fi
 
+echo "[+] Commercium successfully downloaded and stored at user home: $HOME "
+
+
 # extract 
-echo "extracting files . . . "
+echo "[+] extracting files to: $COMMERCIUMCONFIGDIR"
 tar zxvf commercium_continuum-v1.0.5-linux.tar.gz
 
 
-# Config 
+# Config & dir
 if [ ! -d "$COMMERCIUMCONFIGDIR" ]; then
   mkdir $COMMERCIUMCONFIGDIR
 fi
 
+echo "[+] writing commercium.conf config file: $COMMERCIUMCONFIG"
+
 if [ ! -e $COMMERCIUMCONFIG ];
 then
-
-USERNAMERAND=`pwgen 13 1`
-PASSWORDRAND=`pwgen 13 1`
-
-read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: " NODEKEY
+ USERNAMERAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
+ PASSWORDRAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
+ read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: " NODEKEY
 
 cat <<EOF > $COMMERCIUMCONFIG
 txindex=1
@@ -65,7 +70,8 @@ masternodeprivkey=$NODEKEY
 EOF
 
 else
-	nano $COMMERCIUMCONFIG
+ read -n1 -r -p "Commercium config file already exists: $COMMERCIUMCONFIG... Press any key to open it in nano for editing. Нou can edit it manually or Ctrl-X at next step to exit if no action is required and config was successfully writen before";echo
+ nano $COMMERCIUMCONFIG
 fi
 
 
@@ -73,7 +79,7 @@ fi
 echo
 
 while true; do
-    read -p "Do you wish to fetch z-params (if you not sure press y)?" yn
+    read -p "Do you wish to fetch z-params (if you not sure press y)? " yn
     case $yn in
         [Yy]* ) $COMMERCIUMDAEMONDIR/fetch-params.sh; break;;
         [Nn]* ) break;;
@@ -92,12 +98,12 @@ $COMMERCIUMDAEMONDIR/commerciumd
 read -n1 -r -p "Let's make sure no errors appear and Commercium daemon running... Press any key to continue";echo
 
 
-#Set Vars
+#
 currentblock="$($COMMERCIUMDAEMONDIR/commercium-cli getblockcount)"
 
-read -n1 -r -p "Please, check https://explorer.commercium.net/ block number and make sure that its the same or high then this: $currentblock Press any key to continue";echo
+read -n1 -r -p "Please, check https://explorer.commercium.net/ block number and make sure that its the same or higher then this number from your Commercium daemon: $currentblock Press any key to continue";echo
 echo
-read -n1 -r -p "Your blockchain is now synced... Press any key to continue";echo
+read -n1 -r -p "If it's ok then your blockchain is now synced... Press any key to continue or wait for sync";echo
 
 ###Finishing touches
 printf "Following command at local wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
