@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Automatic Commercium Masternodes setup (part 2. VPS masternode setup)
 # Dependencies: wget
@@ -125,6 +125,7 @@ read -n1 -r -p 'Your blockchain is now synced... Press any key to continue' key
 # Finishing touches
 echo "Now need to activate masternode."
 printf "Following command at LOCAL wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
+
 read -n1 -r -p 'Open your local wallet, go to command line shell and activate your masternode Press any key to continue' key
 read -n1 -r -p 'Wait a few minutes for your masternode to start... Press any key to continue' key
 
@@ -141,5 +142,4 @@ else
    printf "[-] Something goes wrong. Maybe request help at Commercium discord or ..."   
    printf "[-] Check your masternode status with following command manually and try to fix it: \ncommercium-cli masternode debug"
    printf "[-] Correct response from this command is: “Masternode successfully started“. Then you’re finished." 
-   printf ""
 fi
