@@ -192,6 +192,19 @@ After connection enter your username and password then you will see linux shell.
 
 For securety purposes you can run your masternode as regular linux user, not `root`. If you want this then create new user `adduser cmmuser` (run as root) and then connect to your VPS with Putty again and login with this new user login and password._
 
+#### masternode-scripts
+
+If you do not want to follow **part 2. Vps install** mannualy you can use our automatic VPS setup script `part2_linux_vps_setup.sh`:
+
+```
+wget https://raw.githubusercontent.com/CommerciumBlockchain/masternode-scripts/master/part2_linux_vps_setup.sh
+chmod +x part2_linux_vps_setup.sh
+./part2_linux_vps_setup.sh
+```
+_If you choose automatic method, then skip 1-3 steps and go to 4 step below to activate your masternode and you are done!_
+
+
+
 #### 1. Enter this commands at linux shell: 
 
 `cd ~` _(to be sure that you are at user home directory)_
@@ -240,6 +253,8 @@ masternodeprivkey=[NODEKEY]
 
 **NOW YOU MASTERNODE IS READY TO START!**
 
+#### 4. Masternode Activation
+
 on local wallet windows `cmd` shell: `commercium-cli.exe startmasternode all missing` alternative command: `commercium-cli.exe startalias MASTERNODEALIAS`
 
 
@@ -249,4 +264,3 @@ P.S. Secure your vps:
 https://www.eurovps.com/blog/20-ways-to-secure-linux-vps/
 
 
-# masternode-scripts
