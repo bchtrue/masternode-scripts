@@ -39,7 +39,7 @@ then
   exit
 fi
 
-echo "[+] Commercium successfully downloaded and stored at user home: $HOME \n"
+echo "[+] Commercium successfully downloaded and stored at user home: $HOME "
 
 
 # extract 
@@ -52,7 +52,7 @@ if [ ! -d "$COMMERCIUMCONFIGDIR" ]; then
   mkdir $COMMERCIUMCONFIGDIR
 fi
 
-echo "[+] writing commercium.conf config file: $COMMERCIUMCONFIG\n"
+echo "[+] writing commercium.conf config file: $COMMERCIUMCONFIG"
 
 if [ ! -e $COMMERCIUMCONFIG ];
 then
@@ -71,7 +71,7 @@ EOF
 
 else
  echo
- read -n1 -r -p 'Commercium config file already exists.. Press any key to open it in nano editor. Edit it manually or Ctrl-X at next step to exit if config was successfully writen before\n' key
+ read -n1 -r -p 'Commercium config file already exists.. Press any key to open it in nano editor. Edit it manually or Ctrl-X at next step to exit if config was successfully writen before' key
  nano $COMMERCIUMCONFIG
 fi
 
