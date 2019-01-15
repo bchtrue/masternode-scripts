@@ -27,7 +27,7 @@ done
 
 if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
 then
- printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
+ printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!\n"
  echo
  cd $HOME
  wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
@@ -39,11 +39,11 @@ then
   exit
 fi
 
-echo "[+] Commercium successfully downloaded and stored at user home: $HOME "
+echo "[+] Commercium successfully downloaded and stored at user home: $HOME \n"
 
 
 # extract 
-echo "[+] extracting files to: $COMMERCIUMCONFIGDIR"
+echo "[+] extracting files to: $COMMERCIUMCONFIGDIR\n"
 tar zxvf commercium_continuum-v1.0.5-linux.tar.gz
 
 
@@ -52,13 +52,13 @@ if [ ! -d "$COMMERCIUMCONFIGDIR" ]; then
   mkdir $COMMERCIUMCONFIGDIR
 fi
 
-echo "[+] writing commercium.conf config file: $COMMERCIUMCONFIG"
+echo "[+] writing commercium.conf config file: $COMMERCIUMCONFIG\n"
 
 if [ ! -e $COMMERCIUMCONFIG ];
 then
  USERNAMERAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
  PASSWORDRAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
- read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: " NODEKEY
+ read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: \n" NODEKEY
 
 cat <<EOF > $COMMERCIUMCONFIG
 txindex=1
@@ -70,7 +70,8 @@ masternodeprivkey=$NODEKEY
 EOF
 
 else
- read -n1 -r -p 'Commercium config file already exists.. Press any key to open it in nano for editing. Нou can edit it manually or Ctrl-X at next step to exit if no action is required and config was successfully writen before' key
+ echo
+ read -n1 -r -p 'Commercium config file already exists.. Press any key to open it in nano editor. Edit it manually or Ctrl-X at next step to exit if config was successfully writen before\n' key
  nano $COMMERCIUMCONFIG
 fi
 
@@ -124,7 +125,7 @@ read -n1 -r -p 'Your blockchain is now synced... Press any key to continue' key
 
 # Finishing touches
 echo "Now need to activate masternode."
-printf "Following command at LOCAL wallet will activate your mastermode: commercium-cli.exe startmasternode all missing"
+printf "Following command at LOCAL wallet will activate your mastermode: commercium-cli.exe startmasternode all missing\n\n"
 
 read -n1 -r -p 'Open your local wallet, go to command line shell and activate your masternode Press any key to continue' key
 read -n1 -r -p 'Wait a few minutes for your masternode to start... Press any key to continue' key
