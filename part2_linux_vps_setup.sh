@@ -90,12 +90,12 @@ $COMMERCIUMDAEMONDIR/commerciumd
 #
 # check daemon running? 
 #
-echo "If you see this error on the screen: \"E: Unable to locate package libgompl\""
+echo "If you see this error on the screen: E: Unable to locate package libgompl"
 echo "Run as root from other terminal windows: sudo apt-get install libgomp1"
 echo "After that you can continue this install proccess"
 echo "How to fix other daemon start errors ask at Commercium discord channel."
 echo
-read -n1 -r -p 'Let\'s make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C' key
+read -n1 -r -p 'Lets make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C' key
 
 
 # Wallet Sync
