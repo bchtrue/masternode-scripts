@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Automatic Commercium Masternodes setup (part 2. VPS masternode setup)
-# Dependencies: 
+# Dependencies: wget
 # (c) Commercium. 2019
 
 version="0.1beta"
@@ -12,21 +12,21 @@ COMMERCIUMMASTERNODECONFIG=$COMMERCIUMCONFIGDIR/cmasternode.conf
 
 
 clear
-read -n1 -r -p "Before you begin, follow PART 1 instuction about how to setup masternodes: https://github.com/CommerciumBlockchain/CommerciumMasternodesSetup/Readme.md Press any key to continue... or CTRL-C to exit";echo
-read -n1 -r -p "Confirm that you are alredy have NODEKEY to setup VPS masternode. And let's begin setting up Commercium MN at the VPS. Press any key to continue...";echo
-read -n1 -r -p "Now we will download and install Commercoum deamon to current user home! Press any key to continue...";echo
+printf "Before you begin, follow PART 1 instuction about how to setup masternodes: https://github.com/CommerciumBlockchain/masternode-scripts Press any key to continue... or CTRL-C to exit"
+printf "Confirm that you are alredy have NODEKEY to setup your VPS masternode. Press any key to continue or Ctrl-C to exit..."
+printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!"
 
 while true; do
-    read -p "Do you wish to install this program?" yn
+    read -p "Do you wish to install Commercium wallet now?" yn
     case $yn in
-        [Yy]* ) make install; break;;
+        [Yy]* ) echo ""; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
 #sudo apt-get -y install 
-echo "downloading files to $HOME . . . "
+echo "downloading files to user home: $HOME . . . "
 cd $HOME
 wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
 
@@ -52,7 +52,7 @@ then
 USERNAMERAND=`pwgen 13 1`
 PASSWORDRAND=`pwgen 13 1`
 
-read -p "Now please enter or better Paste you NODEKEY from Part 1 setup instructions: " NODEKEY
+read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: " NODEKEY
 
 cat <<EOF > $COMMERCIUMCONFIG
 txindex=1
@@ -80,8 +80,15 @@ while true; do
     esac
 done
 
+# Start commercium daemon
+$COMMERCIUMDAEMONDIR/commerciumd
 
-read -n1 -r -p "Let's make sure no errors appear and that Commercium daemon running... Press any key to continue";echo
+
+#
+# check daemon running? 
+#
+
+read -n1 -r -p "Let's make sure no errors appear and Commercium daemon running... Press any key to continue";echo
 
 
 #Set Vars
@@ -107,7 +114,5 @@ else
    printf "[-] Check your masternode status with following command: commercium-cli masternode debug"
    printf ""
 fi
-
-
 
 read -n1 -r -p "If the response is: “Masternode successfully started“, you’re finished.... Press any key to finish";echo
