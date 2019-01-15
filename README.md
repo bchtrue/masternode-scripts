@@ -258,7 +258,48 @@ masternodeprivkey=[NODEKEY]
 on local wallet windows `cmd` shell: `commercium-cli.exe startmasternode all missing` alternative command: `commercium-cli.exe startalias MASTERNODEALIAS`
 
 
+Success start example output:
+```
+{
+  "overall": "Successfully started 1 masternodes, failed to start 0, total 1",
+  "detail": [
+    {
+      "alias": "mn1",
+      "result": "success",
+      "error": ""
+    }
+  ]
+}
+```
+
 on vps `./commercium-cli masternode debug` must display "Masternode successfully started." if not, wait 20 minutes and start the masternode again using the command above.
+
+To activate a masternode the local wallet and masternode must have the masternode list synced
+`./commercium-cli mnsync status` to check it.
+
+There are 2 sync; one is blockchain and one is masternode. In some cases need to wait for full sync ~30 mins.
+
+If you have troubles with syncing (it stop syncking) then it's possible to resync: Part 1) 3.
+
+#### 5. How to add commercium daemon to start automatically after VPS reboot
+
+Create new file `nano cmmstartup.sh`
+with following text:
+
+```
+#!/bin/sh
+cd ~/commercium_continuum-v1.0.5-linux
+./commerciumd
+```
+then 
+`chmod +x cmmstartup.sh`
+
+`crontab -e`
+
+add this line to the bottom:
+`@reboot bash ~/cmmstartup.sh`
+
+To test it just reboot your vps.
 
 P.S. Secure your vps: 
 https://www.eurovps.com/blog/20-ways-to-secure-linux-vps/
