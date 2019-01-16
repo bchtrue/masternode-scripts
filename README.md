@@ -17,7 +17,7 @@ You also can run your masternode at your own computer, but it must be operationa
 ## Masternode info
 
 Masternode reward is completely random. One masternode out of 
-total numbers are picked at random. There is no seniority, no weighting, just 
+total MN numbers are picked at random. There is no seniority, no weighting, just 
 random. So each minute you have a one in (total MN) chance of getting the 
 reward.
 
