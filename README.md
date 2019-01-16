@@ -14,6 +14,18 @@ You also can run your masternode at your own computer, but it must be operationa
 - VPS: better to use latest ubunty (18.04). If you run 16.04 just install: `apt-get install libgomp1`
 - `putty` remote shell client (putty.org)
 
+## Masternode info
+
+Masternode reward is completely random. One masternode out of 
+34 are picked at random. There is no seniority, no weighting, just 
+random. So each minute you have a one in 34 chance of getting the 
+reward.
+
+- 1440 * 8 = 11,520 CMM mined per day 
+- 1440 * 5.0 = 7,200 goes to miners 
+- 1440 * 2.4 = **3,456** goes to masternodes 
+- 1440 * 0.6 = 864 goes to founders fund
+
 
 # PART 1: Local machine setup
 
