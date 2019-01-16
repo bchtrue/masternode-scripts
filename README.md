@@ -23,7 +23,7 @@ reward.
 
 - 1440 * 8 = 11,520 CMM mined per day 
 - 1440 * 5.0 = 7,200 goes to miners 
-- 1440 * 2.4 = **3,456** goes to masternodes 
+- 1440 * 2.4 = **3,456** goes to all masternodes 
 - 1440 * 0.6 = 864 goes to founders fund
 
 
