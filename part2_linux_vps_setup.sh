@@ -4,7 +4,7 @@
 # Dependencies: wget
 # (c) Commercium. 2019
 
-version="0.1beta"
+version="0.2"
 COMMERCIUMCONFIGDIR=~/.commercium
 COMMERCIUMDAEMONDIR=~/commercium_continuum-v1.0.5-linux
 COMMERCIUMCONFIG=$COMMERCIUMCONFIGDIR/commercium.conf
@@ -58,7 +58,7 @@ if [ ! -e $COMMERCIUMCONFIG ];
 then
  USERNAMERAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
  PASSWORDRAND=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
- read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: \n" NODEKEY
+ read -p "Now please enter/copy&paste your NODEKEY from Part 1 setup instructions: " NODEKEY
 
 cat <<EOF > $COMMERCIUMCONFIG
 txindex=1
@@ -111,12 +111,12 @@ do
         echo "Comparing block heights to ensure server is fully synced";
         echo "Highest: $highestblock";echo "Currently at: $currentblock";
         echo "Checking again in 60 seconds... The install will continue once it's synced.";echo
-        echo "Last 20 lines of the log for error checking...";
+        echo "Last 6 lines of the log for error checking...";
         echo "===============";
-        tail -20 ~/.commercium/debug.log
+        tail -6 ~/.commercium/debug.log
 	echo "===============";
 	echo "Network unreachable errors can be normal. Just ensure the current block height is rising over time...";
-        sleep 60
+        sleep 20
 done
 
 
@@ -134,15 +134,15 @@ read -n1 -r -p 'Wait a few minutes for your masternode to start... Press any key
 
 ans=`$COMMERCIUMDAEMONDIR/commercium-cli masternode debug`
 
-if [ X"$ans" == X"successfully" ]; then
-   printf "[+] Masternode successfully started..."
-   printf "[+] Congratulations!"
+if [[ $ans == *"successfully"* ]]; then
+   echo "[+] Masternode successfully started..."
+   echo "[+] Congratulations!"
    exit
 else
-   printf "[-] Masternode NOT started..."
-   printf "[-] Something goes wrong. Maybe request help at Commercium discord or ..."   
-   printf "[-] Check your masternode status with following command manually and try to fix it: \ncommercium-cli masternode debug"
-   printf "[-] Correct response from this command is: \"Masternode successfully started\". Then you’re finished." 
+   echo "[-] Masternode NOT started..."
+   echo "[-] Something goes wrong. Maybe request help at Commercium discord or ..."   
+   printf "[-] Check your masternode status with following command manually and try to fix it: \ncommercium-cli masternode debug\n"
+   printf "[-] Correct response from this command is: \"Masternode successfully started\". Then you’re finished.\n" 
 fi
 
 exit
