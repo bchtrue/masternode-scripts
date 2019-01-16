@@ -17,8 +17,8 @@ You also can run your masternode at your own computer, but it must be operationa
 ## Masternode info
 
 Masternode reward is completely random. One masternode out of 
-34 are picked at random. There is no seniority, no weighting, just 
-random. So each minute you have a one in 34 chance of getting the 
+total numbers are picked at random. There is no seniority, no weighting, just 
+random. So each minute you have a one in (total MN) chance of getting the 
 reward.
 
 - 1440 * 8 = 11,520 CMM mined per day 
