@@ -256,6 +256,8 @@ masternode=1
 masternodeprivkey=[NODEKEY]
 ```
 
+Hint: to paste text at `nano` you can use `ctrl+shift+v`, or `middle mouse click`, or `shift+insert`
+
 `NODEKEY` - is the key from previous part (6.1)
 
 `PASSWORD` - random password. Use at least 10 charts secure password.
