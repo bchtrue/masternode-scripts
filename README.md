@@ -213,7 +213,12 @@ wget https://raw.githubusercontent.com/CommerciumBlockchain/masternode-scripts/m
 chmod +x part2_linux_vps_setup.sh
 ./part2_linux_vps_setup.sh
 ```
-_If you choose automatic method, then skip 1-3 steps and go to 4 step below to activate your masternode and you are done!_
+
+###### Troubles and notes about this script 
+
+- You can use it to install your commercium daemon as user (not root) for better securety. 
+- Because of this you must install dependences manually as root with following command: `sudo apt-get install wget nano libgomp1 -y` or check that your system has this packages.
+- If you choose this automatic method, then skip 1-3 steps and go to __step 4__ below to activate your masternode and you are done!
 
 
 
@@ -318,4 +323,7 @@ To test it just reboot your vps.
 P.S. Secure your vps: 
 https://www.eurovps.com/blog/20-ways-to-secure-linux-vps/
 
+#### Masternode reward.
+
+All rewards must be shielded by sending to a transparent Z address starting with C
 
