@@ -46,6 +46,7 @@ https://youtu.be/xuLRBuvaSgU (MacOS)
 
 If you are already have old Commercium wallet then backup your data and export your private keys. You will import them later to new wallet:
 
+_Video instruction about how to migrate to new Commercium wallet:_ `https://youtu.be/xuLRBuvaSgU?t=166` 
 
 Buckup `~/.commercium` - directory for MacOs/Linux
 
