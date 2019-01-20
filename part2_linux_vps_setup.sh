@@ -37,13 +37,17 @@ echo "[!] Commercium daemon depends on libgomp1 !"
 # not root/non root mode 
 if [ "$EUID" -ne 0 ];
   then 
-   echo "You run this installation script at user mode. It's okey! Right now open new terminal window"
-   echo "And install run MANNUALLY AS ROOT following command: sudo apt-get libgomp1 -y"
+   echo "[!] NON ROOT MODE DETECTED! You are running this script at user mode. It's okey! Right now open new terminal window"
+   echo "and install libgomp1 MANNUALLY AS ROOT with following command:"
+   echo
+   echo "sudo apt-get libgomp1 -y"
+   echo
    echo "After that you can continue this install proccess"
+   echo
    read -p "Manual installation done? Press any key to confirm and continue" 
    echo
   else 
-   echo "[+] Trying to install libgomp1 automaticaly"
+   echo "[+] Trying to install libgomp1 automatically"
    apt-get install libgomp1 -y
 fi
 # end libgomp install
