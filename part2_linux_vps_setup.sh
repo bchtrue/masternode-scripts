@@ -4,7 +4,7 @@
 # Dependencies: wget
 # (c) Commercium. 2019
 
-version="0.2"
+version="0.3"
 COMMERCIUMCONFIGDIR=~/.commercium
 COMMERCIUMDAEMONDIR=~/commercium_continuum-v1.0.5-linux
 COMMERCIUMCONFIG=$COMMERCIUMCONFIGDIR/commercium.conf
@@ -24,7 +24,32 @@ while true; do
     esac
 done
 
+# libgomp1 check
+GOMPAVAILABLE=`ldconfig -p | grep libgomp1`
 
+if [ -z "$GOMPAVAILABLE" ]; 
+then
+  echo "[-] libgomp1 not exists at your system."
+fi
+
+echo "[!] Commercium daemon depends on libgomp1 !"
+
+# not root/non root mode 
+if [ "$EUID" -ne 0 ];
+  then 
+   echo "You run this installation script at user mode. It's okey! Right now open new terminal window"
+   echo "And install run MANNUALLY AS ROOT following command: sudo apt-get libgomp1 -y"
+   echo "After that you can continue this install proccess"
+   read -p "Manual installation done? Press any key to confirm and continue" 
+   echo
+  else 
+   echo "[+] Trying to install libgomp1 automaticaly"
+   apt-get install libgomp1 -y
+fi
+# end libgomp install
+
+
+# install commercium daemon
 if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
 then
  printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!\n"
@@ -88,14 +113,9 @@ $COMMERCIUMDAEMONDIR/commerciumd
 
 
 #
-# check daemon running? 
+# check daemon running by user confirmation? 
 #
-echo "If you see this error on the screen: E: Unable to locate package libgompl"
-echo "Run as root from other terminal windows: sudo apt-get install libgomp1"
-echo "After that you can continue this install proccess"
-echo "How to fix other daemon start errors ask at Commercium discord channel."
-echo
-read -n1 -r -p 'Lets make sure no errors appear and Commercium daemon running... Press any key to continue or exit with Ctrl-C' key
+read -n1 -r -p 'Lets make sure no errors appear on the screen above and Commercium daemon running... Press any key to confirm or exit with Ctrl-C (solve this issue manually and then restart the script)' key
 
 
 # Wallet Sync
