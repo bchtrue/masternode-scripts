@@ -30,25 +30,25 @@ GOMPAVAILABLE=`ldconfig -p | grep libgomp`
 if [ -z "$GOMPAVAILABLE" ]; 
 then
   echo "[-] libgomp1 not exists at your system."
-fi
-
-echo "[!] Commercium daemon depends on libgomp1 !"
-
-# not root/non root mode 
-if [ "$EUID" -ne 0 ];
-  then 
-   echo "[!] NON ROOT MODE DETECTED! You are running this script at user mode. It's okey! Right now open new terminal window"
-   echo "and install libgomp1 MANNUALLY AS ROOT with following command:"
-   echo
-   echo "sudo apt-get libgomp1 -y"
-   echo
-   echo "After that you can continue this install proccess"
-   echo
-   read -p "Manual installation done? Press any key to confirm and continue" 
-   echo
-  else 
-   echo "[+] Trying to install libgomp1 automatically"
-   apt-get install libgomp1 -y
+  echo "[!] Commercium daemon depends on libgomp1 !"
+  
+ # not root/non root mode 
+ if [ "$EUID" -ne 0 ];
+   then 
+    echo "[!] NON ROOT MODE DETECTED! You are running this script at user mode. It's okey! Right now open new terminal window"
+    echo "and install libgomp1 MANNUALLY AS ROOT with following command:"
+    echo
+    echo "sudo apt-get libgomp1 -y"
+    echo
+    echo "After that you can continue this install proccess"
+    echo
+    read -p "Manual installation done? Press any key to confirm and continue" 
+    echo
+   else 
+    echo "[+] Trying to install libgomp1 automatically"
+    apt-get install libgomp1 -y
+ fi
+ 
 fi
 # end libgomp install
 
