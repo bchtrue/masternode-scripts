@@ -25,7 +25,7 @@ while true; do
 done
 
 # libgomp1 check
-GOMPAVAILABLE=`ldconfig -p | grep libgomp1`
+GOMPAVAILABLE=`ldconfig -p | grep libgomp`
 
 if [ -z "$GOMPAVAILABLE" ]; 
 then
