@@ -331,5 +331,5 @@ All rewards must be shielded by sending to a transparent Z address starting with
 
 #### Usefull links
 
-http://master.cmm.coininsta.com/ - network masternode list
-https://mntrend.com/en/currencies/CMM - ms stats, profitability
+- http://master.cmm.coininsta.com/ - network masternode list
+- https://mntrend.com/en/currencies/CMM - ms stats, profitability
