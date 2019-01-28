@@ -326,7 +326,9 @@ https://www.eurovps.com/blog/20-ways-to-secure-linux-vps/
 
 #### Masternode reward.
 
-All rewards must be shielded by sending to a transparent Z address starting with C
+All MN rewards must be **shielded** by sending to a transparent Z address starting with C
+
+You just copy the z_addr. Go to balances and right click the address  with the masternode collateral which shouldn’t show the balance of 100,000 which is used for the masternode. Then click send from, then paste the z_addr and click send maximum or input the amount and click send. Shielding is sending from a t-addr (transparent address, which for Commercium starts with C) to a z_addr starting with a z.
 
 
 #### Usefull links
