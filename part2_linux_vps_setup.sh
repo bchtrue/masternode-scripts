@@ -2,11 +2,11 @@
 
 # Automatic Commercium Masternodes setup (part 2. VPS masternode setup)
 # Dependencies: wget
-# (c) Commercium. 2019
+# (c) Commercium. 2020
 
-version="0.3"
+version="0.4"
 COMMERCIUMCONFIGDIR=~/.commercium
-COMMERCIUMDAEMONDIR=~/commercium_continuum-v1.0.5-linux
+COMMERCIUMDAEMONDIR=~/commercium-v3
 COMMERCIUMCONFIG=$COMMERCIUMCONFIGDIR/commercium.conf
 COMMERCIUMMASTERNODECONFIG=$COMMERCIUMCONFIGDIR/cmasternode.conf
 
@@ -50,17 +50,17 @@ then
 fi
 # end libgomp install
 
-
+ARCHIVENAME=commercium-v3.tar.gz
 # install commercium daemon
-if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
+if [ ! -e $HOME/commercium-v3.tar.gz ];
 then
  printf "Now we will download and install Commercoum deamon to current user home directory: $HOME!\n"
  echo
  cd $HOME
- wget https://github.com/CommerciumBlockchain/CommerciumContinuum/releases/download/v1.0.5/commercium_continuum-v1.0.5-linux.tar.gz
+ wget https://github.com/CommerciumBlockchain/Commercium/releases/download/v3.0.0/commercium-v3.tar.gz
 fi
 
-if [ ! -e $HOME/commercium_continuum-v1.0.5-linux.tar.gz ];
+if [ ! -e $HOME/$ARCHIVENAME ];
 then
   echo "Error downloading commercium wallet linux archive."
   exit
@@ -69,9 +69,30 @@ fi
 echo "[+] Commercium successfully downloaded and stored at user home: $HOME "
 
 
+
+
+if [ ! -e $HOME/commercium-fetch-params ];
+then
+ printf "Now download fetch-params script to: $HOME!\n"
+ echo
+ cd $HOME
+ wget https://github.com/CommerciumBlockchain/Commercium/releases/download/v3.0.0/commercium-fetch-params
+fi
+
+if [ ! -e $HOME/commercium-fetch-params ];
+then
+  echo "Error downloading fetchparams."
+  exit
+fi
+
+echo "[+] Fetchparams downloaded and stored at: $HOME "
+
+
+
+
 # extract 
 echo "[+] extracting files to: $COMMERCIUMCONFIGDIR\n"
-tar zxvf commercium_continuum-v1.0.5-linux.tar.gz
+tar zxvf $ARCHIVENAME
 
 
 # Config & dir
@@ -107,7 +128,8 @@ fi
 echo
 if [ ! -e $HOME/sapling-spend.params ] || [ ! -e $HOME/sprout-proving.key ] || [ ! -e $HOME/sapling-output.params ] || [ ! -e $HOME/sprout-groth16.params ];
 then
- $COMMERCIUMDAEMONDIR/fetch-params.sh
+ #$COMMERCIUMDAEMONDIR/fetch-params.sh
+ bash $HOME/commercium-fetch-params
 fi 
 
 # Start commercium daemon
